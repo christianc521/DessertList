@@ -13,6 +13,10 @@
 		35A0ACAA2B229CFE00778176 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35A0ACA92B229CFE00778176 /* Preview Assets.xcassets */; };
 		35A0ACAC2B229CFE00778176 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACAB2B229CFE00778176 /* Persistence.swift */; };
 		35A0ACAF2B229CFE00778176 /* RecipeFinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACAD2B229CFE00778176 /* RecipeFinder.xcdatamodeld */; };
+		35A0ACB62B22A0C100778176 /* mealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACB52B22A0C100778176 /* mealModel.swift */; };
+		35A0ACB82B22A26700778176 /* mealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACB72B22A26700778176 /* mealViewModel.swift */; };
+		35A0ACBA2B22C28400778176 /* recipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACB92B22C28400778176 /* recipeModel.swift */; };
+		35A0ACBE2B22CB2C00778176 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0ACBD2B22CB2C00778176 /* MealDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		35A0ACA92B229CFE00778176 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		35A0ACAB2B229CFE00778176 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		35A0ACAE2B229CFE00778176 /* RecipeFinder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeFinder.xcdatamodel; sourceTree = "<group>"; };
+		35A0ACB52B22A0C100778176 /* mealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mealModel.swift; sourceTree = "<group>"; };
+		35A0ACB72B22A26700778176 /* mealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mealViewModel.swift; sourceTree = "<group>"; };
+		35A0ACB92B22C28400778176 /* recipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeModel.swift; sourceTree = "<group>"; };
+		35A0ACBD2B22CB2C00778176 /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +63,16 @@
 		35A0ACA12B229CFC00778176 /* RecipeFinder */ = {
 			isa = PBXGroup;
 			children = (
+				35A0ACB72B22A26700778176 /* mealViewModel.swift */,
 				35A0ACA22B229CFC00778176 /* RecipeFinderApp.swift */,
 				35A0ACA42B229CFC00778176 /* ContentView.swift */,
 				35A0ACA62B229CFE00778176 /* Assets.xcassets */,
 				35A0ACAB2B229CFE00778176 /* Persistence.swift */,
 				35A0ACAD2B229CFE00778176 /* RecipeFinder.xcdatamodeld */,
 				35A0ACA82B229CFE00778176 /* Preview Content */,
+				35A0ACB52B22A0C100778176 /* mealModel.swift */,
+				35A0ACB92B22C28400778176 /* recipeModel.swift */,
+				35A0ACBD2B22CB2C00778176 /* MealDetailView.swift */,
 			);
 			path = RecipeFinder;
 			sourceTree = "<group>";
@@ -143,8 +155,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35A0ACBE2B22CB2C00778176 /* MealDetailView.swift in Sources */,
 				35A0ACAC2B229CFE00778176 /* Persistence.swift in Sources */,
 				35A0ACAF2B229CFE00778176 /* RecipeFinder.xcdatamodeld in Sources */,
+				35A0ACBA2B22C28400778176 /* recipeModel.swift in Sources */,
+				35A0ACB62B22A0C100778176 /* mealModel.swift in Sources */,
+				35A0ACB82B22A26700778176 /* mealViewModel.swift in Sources */,
 				35A0ACA52B229CFC00778176 /* ContentView.swift in Sources */,
 				35A0ACA32B229CFC00778176 /* RecipeFinderApp.swift in Sources */,
 			);

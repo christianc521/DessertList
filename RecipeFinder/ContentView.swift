@@ -9,77 +9,68 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    
+    @StateObject var viewModel = mealViewModel()
+    @State private var selectedMeal: Meal?
+    @State var isTapped = false
+    @State private var isDetailViewActive = false
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        NavigationSplitView {
+            List(viewModel.meals, id: \.idMeal) { meal in
+                NavigationLink(
+                    destination: MealDetailView(meal: viewModel.selectedMealDetail ?? MealDetail.placeholder),
+                       isActive: Binding<Bool>(get: { isTapped },
+                                               set: { isTapped = $0; print("clicked on: \(meal.strMeal)");
+                                                   viewModel.fetchRecipe(for: meal.strMeal);
+                                                   selectedMeal = meal;
+                                                   isDetailViewActive = true}),
+                       label: { HStack {
+                           AsyncImage(url: URL(string: meal.strMealThumb)) { image in
+                               image.resizable() // Make the image resizable
+                           }
+                           placeholder: {
+                               ProgressView() // Show a progress view while loading the image
+                           }
+                           .frame(width: 50, height: 50) // Set the frame for the image
+                           .clipShape(Circle()) // Clip the image to a circle
+                           .padding(.trailing, 8) // Add some padding to the right of the image
+                           
+                           Text(meal.strMeal)
+                        }
+                           
+                       }
+                )
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            .navigationTitle("Desserts")
+            .onAppear {
+                viewModel.fetchMeals()
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        } detail: {
+            Text("Select a dessert")
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+
+//NavigationStack {
+//            List(viewModel.meals, id: \.idMeal) { meal in
+//                Button(meal.strMeal) {
+//                    viewModel.fetchRecipe(for: meal.strMeal)
+//                    isDetailViewActive = true
+//                }
+//            }
+//            .navigationTitle("Desserts")
+//
+//            // Conditional NavigationLink
+//            NavigationLink(
+//                destination: MealDetailView(meal: viewModel.selectedMealDetail ?? MealDetail.placeholder),
+//                isActive: $isDetailViewActive
+//            ) { EmptyView() }
+//        }
+//        .onAppear {
+//            viewModel.fetchMeals()
+//}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
